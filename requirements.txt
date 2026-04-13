@@ -1,0 +1,13 @@
+# QUANTAQ Air Quality Analyzer — Python dependencies
+# Generated for NumPy 2.x compatibility (no statsmodels needed)
+#
+# Install manually:
+#   pip install -r requirements.txt
+#
+# Or just double-click launch.bat — it installs everything automatically.
+
+streamlit
+pandas
+numpy
+plotly
+py-quantaq
