@@ -6,7 +6,7 @@ Created on Sun Apr 12 17:21:55 2026
 """
 @echo off
 REM --- Set your QuantAQ API key here or in system env vars ---
-set QUANTAQAPIKEY="JTAS7R9CS5YST0IYVU9RQOWJ"
+
 
 REM --- (Optional) activate conda/venv ---
 REM call C:\Users\YourUser\anaconda3\Scripts\activate.bat yourenv
