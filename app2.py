@@ -50,19 +50,22 @@ st.set_page_config(
 )
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  THEME CSS
+#  THEME CSS  — full dark theme with all visibility fixes
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
+/* ── Base ── */
 html,body,[class*="css"]{
     font-family:'DM Sans',sans-serif!important;
     background:#0d1117!important;
     color:#e6edf3!important;
 }
 .stApp{background:#0d1117!important}
+.main .block-container{padding-top:1rem!important;}
 
+/* ── App header ── */
 .app-header{
     background:linear-gradient(135deg,#0d1117 0%,#0a2310 50%,#0d1117 100%);
     border-bottom:1px solid #30363d;
@@ -71,38 +74,102 @@ html,body,[class*="css"]{
     position:relative;overflow:hidden;
 }
 .app-header::before{
-    content:'';position:absolute;top:-40%;right:-5%;
+    content:\'\';position:absolute;top:-40%;right:-5%;
     width:380px;height:380px;
     background:radial-gradient(circle,rgba(0,212,100,.15) 0%,transparent 70%);
     pointer-events:none;
 }
 .app-header h1{
-    font-family:'Space Mono',monospace!important;
+    font-family:\'Space Mono\',monospace!important;
     font-size:22px;font-weight:700;
     color:#00d464!important;letter-spacing:-.5px;margin:0 0 4px;
 }
-.app-header p{color:#8b949e;font-size:12px;margin:0;}
+.app-header p{color:#8b949e!important;font-size:12px;margin:0;}
 
+/* ── Sidebar ── */
 section[data-testid="stSidebar"]{
     background:#161b22!important;
     border-right:1px solid #30363d!important;
 }
+section[data-testid="stSidebar"] *{color:#e6edf3;}
 section[data-testid="stSidebar"] label{
-    font-family:'Space Mono',monospace!important;
+    font-family:\'Space Mono\',monospace!important;
     font-size:10px!important;font-weight:700!important;
     letter-spacing:1.5px!important;color:#00d464!important;
     text-transform:uppercase!important;
+}
+section[data-testid="stSidebar"] .stCaption p,
+section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p{
+    color:#8b949e!important;font-size:11px!important;
 }
 section[data-testid="stSidebar"] input,
 section[data-testid="stSidebar"] textarea{
     background:#0d1117!important;border:1px solid #30363d!important;
     color:#e6edf3!important;border-radius:6px!important;
 }
+section[data-testid="stSidebar"] input::placeholder,
+section[data-testid="stSidebar"] textarea::placeholder{color:#4a5568!important;}
+section[data-testid="stSidebar"] [data-testid="stRadio"] label,
+section[data-testid="stSidebar"] [data-testid="stCheckbox"] label{
+    color:#e6edf3!important;font-size:13px!important;
+    letter-spacing:0!important;text-transform:none!important;
+    font-family:\'DM Sans\',sans-serif!important;
+}
+section[data-testid="stSidebar"] [data-baseweb="select"] > div{
+    background:#0d1117!important;border-color:#30363d!important;color:#e6edf3!important;
+}
 
+/* ── Main area widgets ── */
+[data-baseweb="select"] > div{
+    background:#161b22!important;border-color:#30363d!important;color:#e6edf3!important;
+}
+[data-baseweb="select"] li{background:#161b22!important;color:#e6edf3!important;}
+[data-baseweb="select"] li:hover{background:#1f2937!important;}
+[data-testid="stTextInput"] input,[data-testid="stTextArea"] textarea{
+    background:#161b22!important;border-color:#30363d!important;color:#e6edf3!important;
+}
+[data-testid="stWidgetLabel"] p,
+.stSelectbox label,.stTextInput label,.stDateInput label,
+.stTimeInput label,.stSlider label,.stCheckbox label,.stRadio label{
+    color:#e6edf3!important;
+}
+.stCaption p,[data-testid="stCaptionContainer"] p{color:#8b949e!important;}
+.stMarkdown p,.stMarkdown li{color:#e6edf3!important;}
+[data-testid="stAlert"] p,
+[data-testid="stAlert"] [data-testid="stMarkdownContainer"] p{color:#e6edf3!important;}
+
+/* ── Data editor ── */
+[data-testid="stDataEditor"]{
+    background:#161b22!important;border:1px solid #30363d!important;
+    border-radius:8px!important;
+}
+[data-testid="stDataEditor"] th{
+    background:#1f2937!important;color:#00d464!important;
+    font-family:\'Space Mono\',monospace!important;font-size:10px!important;
+    letter-spacing:1px!important;text-transform:uppercase!important;
+}
+[data-testid="stDataEditor"] td{background:#161b22!important;color:#e6edf3!important;font-size:12px!important;}
+[data-testid="stDataEditor"] tr:hover td{background:#1f2937!important;}
+
+/* ── DataFrames ── */
+.stDataFrame{border:1px solid #30363d!important;border-radius:10px!important;}
+[data-testid="stDataFrame"] th{background:#1f2937!important;color:#00d464!important;}
+[data-testid="stDataFrame"] td{color:#e6edf3!important;}
+
+/* ── Expander ── */
+[data-testid="stExpander"]{
+    border:1px solid #30363d!important;border-radius:8px!important;
+    background:#161b22!important;
+}
+[data-testid="stExpander"] summary{color:#e6edf3!important;background:#161b22!important;}
+[data-testid="stExpander"] summary:hover{background:#1f2937!important;}
+[data-testid="stExpander"] [data-testid="stMarkdownContainer"] p{color:#e6edf3!important;}
+
+/* ── Buttons ── */
 .stButton>button{
     background:linear-gradient(135deg,#00d464,#00a84f)!important;
     color:#0d1117!important;
-    font-family:'Space Mono',monospace!important;
+    font-family:\'Space Mono\',monospace!important;
     font-weight:700!important;font-size:11px!important;
     letter-spacing:.8px!important;border:none!important;
     border-radius:10px!important;padding:10px 20px!important;
@@ -119,7 +186,12 @@ section[data-testid="stSidebar"] textarea{
     border-radius:10px!important;width:100%!important;
 }
 .stDownloadButton>button:hover{background:rgba(0,212,100,.1)!important;}
+[data-testid="stForm"]{
+    background:#161b22!important;border:1px solid #30363d!important;
+    border-radius:8px!important;padding:12px!important;
+}
 
+/* ── Metrics ── */
 [data-testid="metric-container"]{
     background:#161b22!important;border:1px solid #30363d!important;
     border-radius:10px!important;padding:14px!important;
@@ -129,10 +201,12 @@ section[data-testid="stSidebar"] textarea{
     letter-spacing:1px!important;color:#8b949e!important;
 }
 [data-testid="stMetricValue"]{
-    font-family:'Space Mono',monospace!important;
+    font-family:\'Space Mono\',monospace!important;
     font-size:20px!important;color:#00d464!important;
 }
+[data-testid="stMetricDelta"]{color:#8b949e!important;font-size:12px!important;}
 
+/* ── Tabs ── */
 .stTabs [data-baseweb="tab-list"]{
     background:#161b22!important;
     border-bottom:1px solid #30363d!important;gap:0!important;
@@ -144,40 +218,38 @@ section[data-testid="stSidebar"] textarea{
     padding:12px 16px!important;transition:all .15s!important;
 }
 .stTabs [aria-selected="true"]{
-    color:#e6edf3!important;
-    border-bottom:2px solid #00d464!important;
-    background:transparent!important;
+    color:#e6edf3!important;border-bottom:2px solid #00d464!important;background:transparent!important;
 }
+.stTabs [data-baseweb="tab"]:hover{color:#e6edf3!important;}
 
-.stProgress>div>div>div{
-    background:linear-gradient(90deg,#00d464,#3b82f6)!important;
-}
+/* ── Progress / alerts / misc ── */
+.stProgress>div>div>div{background:linear-gradient(90deg,#00d464,#3b82f6)!important;}
+.stProgress [data-testid="stText"]{color:#e6edf3!important;}
 .stAlert{border-radius:8px!important;}
-.stDataFrame{border:1px solid #30363d!important;border-radius:10px!important;}
 hr{border-color:#30363d!important;}
 
+/* ── Section label ── */
 .section-label{
-    font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
-    letter-spacing:1.5px;color:#00d464;text-transform:uppercase;margin-bottom:6px;
+    font-family:\'Space Mono\',monospace;font-size:10px;font-weight:700;
+    letter-spacing:1.5px;color:#00d464;text-transform:uppercase;
+    margin-bottom:6px;display:block;
 }
-.kpi-card{
-    background:#161b22;border:1px solid #30363d;border-radius:10px;
-    padding:16px 20px;text-align:center;
-}
-.kpi-value{
-    font-family:'Space Mono',monospace;font-size:22px;font-weight:700;
-    color:#00d464;line-height:1;
-}
-.kpi-label{
-    font-size:10px;color:#8b949e;text-transform:uppercase;
-    letter-spacing:1px;margin-top:4px;
+.kpi-card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px 20px;text-align:center;}
+.kpi-value{font-family:\'Space Mono\',monospace;font-size:22px;font-weight:700;color:#00d464;line-height:1;}
+.kpi-label{font-size:10px;color:#8b949e;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+
+/* ── Map / Plotly frames ── */
+.stfolium-container iframe{border:1px solid #30363d!important;border-radius:10px!important;}
+[data-testid="stPlotlyChart"]{
+    background:#161b22!important;border-radius:10px!important;
+    border:1px solid #30363d!important;padding:4px!important;
 }
 
-/* folium iframe dark border */
-.stfolium-container iframe{
-    border:1px solid #30363d!important;
-    border-radius:10px!important;
-}
+/* ── Scrollbars ── */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:#0d1117;}
+::-webkit-scrollbar-thumb{background:#30363d;border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:#8b949e;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -940,7 +1012,7 @@ def chart_correlation(df, site):
     return fig
 
 
-def chart_scatter_pair(df, col_x, col_y, site, color):
+def chart_scatter_pair2(df, col_x, col_y, site, color):
     """Scatter + linear regression for any two pollutants."""
     clean = df[[col_x,col_y]].dropna()
     if len(clean) < 5:
@@ -971,6 +1043,58 @@ def chart_scatter_pair(df, col_x, col_y, site, color):
         xaxis_title="{} ({})".format(col_x.upper(),POLLUTANT_UNITS.get(col_x,"")),
         yaxis_title="{} ({})".format(col_y.upper(),POLLUTANT_UNITS.get(col_y,"")),
         **DARK)
+    return fig
+
+def chart_scatter_pair(df, col_x, col_y, site, color, **kwargs):
+    """Scatter + linear regression for any two pollutants.
+
+    Accepts extra kwargs and ignores them so it is safe to call from
+    Streamlit callbacks or widgets that may pass a 'key' or other kwargs.
+    """
+    # Validate columns exist
+    if col_x not in df.columns or col_y not in df.columns:
+        return go.Figure()
+
+    clean = df[[col_x, col_y]].dropna()
+    if len(clean) < 5:
+        return go.Figure()
+
+    x = clean[col_x].values
+    y = clean[col_y].values
+
+    # Fit linear model y = m*x + b
+    coeffs = np.polyfit(x, y, 1)
+    slope, intercept = coeffs[0], coeffs[1]
+
+    xl = np.linspace(x.min(), x.max(), 200)
+    yl = np.polyval(coeffs, xl)
+    y_hat = np.polyval(coeffs, x)
+
+    ss_res = np.sum((y - y_hat) ** 2)
+    ss_tot = np.sum((y - y.mean()) ** 2)
+    r2 = 1 - ss_res / ss_tot if ss_tot > 0 else float("nan")
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=x, y=y, mode="markers", name="Observations",
+        marker=dict(color=color, opacity=0.6, size=6),
+        hovertemplate=f"{col_x.upper()}: %{{x:.2f}}<br>{col_y.upper()}: %{{y:.2f}}<extra></extra>"
+    ))
+    fig.add_trace(go.Scatter(
+        x=xl, y=yl, mode="lines", name="Linear fit",
+        line=dict(color="#fbbf24", width=2, dash="dash")
+    ))
+
+    fig.update_layout(
+        title=dict(
+            text=f"{col_x.upper()} vs {col_y.upper()}  |  R²={r2:.3f}  slope={slope:.3f} — {site}",
+            font=dict(color="#e6edf3", size=13)
+        ),
+        xaxis_title=f"{col_x.upper()} ({POLLUTANT_UNITS.get(col_x,'')})",
+        yaxis_title=f"{col_y.upper()} ({POLLUTANT_UNITS.get(col_y,'')})",
+        **DARK
+    )
+
     return fig
 
 
@@ -1370,7 +1494,7 @@ with st.sidebar:
              "Leave blank to use the free Folium/OpenStreetMap map.",
     )
     map_workers = st.slider("Parallel download threads", min_value=1,
-                             max_value=10, value=6,
+                             max_value=20, value=6,
                              help="More threads = faster download but more API load.")
 
     st.markdown("<hr>", unsafe_allow_html=True)
@@ -1611,14 +1735,14 @@ with tab_ts:
     st.markdown('<p class="section-label">Site: {}</p>'.format(selected_site),
                 unsafe_allow_html=True)
     st.plotly_chart(chart_timeseries_site(sel_df, selected_site, sel_color),
-                    use_container_width=True)
+                    use_container_width=True, key="pc_ts_site")
     if len(sites) > 1 and avail_poll:
         st.markdown("---")
         st.markdown('<p class="section-label">All Sites Overlay</p>',
                     unsafe_allow_html=True)
         p = st.selectbox("Pollutant", avail_poll, key="ts_p")
         st.plotly_chart(chart_timeseries_compare(site_data,p,colors),
-                        use_container_width=True)
+                        use_container_width=True, key="pc_ts_compare")
 
 # ── Statistics ────────────────────────────────────────────────────────────────
 with tab_stats:
@@ -1656,11 +1780,11 @@ with tab_hist:
     if avail_poll:
         h_p = st.selectbox("Pollutant", avail_poll, key="hist_p")
         st.plotly_chart(chart_histogram(sel_df,h_p,selected_site,sel_color),
-                        use_container_width=True)
+                        use_container_width=True, key="pc_hist_single")
         if st.checkbox("Show all pollutants (grid)", value=False, key="hist_all"):
             for pol in avail_poll:
                 st.plotly_chart(chart_histogram(sel_df,pol,selected_site,sel_color),
-                                use_container_width=True)
+                                use_container_width=True, key="pc_hist_grid_{}".format(pol))
     else:
         st.info("No pollutant data.")
 
@@ -1669,7 +1793,7 @@ with tab_diurnal:
     if avail_poll:
         d_p = st.selectbox("Pollutant", avail_poll, key="diu_p")
         st.plotly_chart(chart_diurnal(sel_df,d_p,selected_site,sel_color),
-                        use_container_width=True)
+                        use_container_width=True, key="pc_diurnal_site")
         st.caption("Shaded band = ±1 SE of the hourly mean.")
 
         if len(sites) > 1:
@@ -1695,14 +1819,14 @@ with tab_diurnal:
                 yaxis_title=POLLUTANT_UNITS.get(d_p2,""),
                 **dk(xaxis=dict(title="Hour", tickmode="linear",
                                 dtick=3, gridcolor="#30363d")))
-            st.plotly_chart(fig_d, use_container_width=True)
+            st.plotly_chart(fig_d, use_container_width=True, key="pc_diurnal_all")
 
 # ── Weekly ───────────────────────────────────────────────────────────────────
 with tab_weekly:
     if avail_poll:
         w_p = st.selectbox("Pollutant", avail_poll, key="week_p")
         st.plotly_chart(chart_weekly(sel_df,w_p,selected_site,sel_color),
-                        use_container_width=True)
+                        use_container_width=True, key="pc_weekly")
         st.caption("Box-plot shows spread of all observations in that day of week.")
     else:
         st.info("No pollutant data.")
@@ -1712,7 +1836,7 @@ with tab_monthly:
     if avail_poll:
         m_p = st.selectbox("Pollutant", avail_poll, key="mon_p")
         st.plotly_chart(chart_monthly(sel_df,m_p,selected_site,sel_color),
-                        use_container_width=True)
+                        use_container_width=True, key="pc_monthly")
         st.caption("Error bars = ±1 standard deviation.")
     else:
         st.info("No pollutant data.")
@@ -1722,7 +1846,7 @@ with tab_rolling:
     if avail_poll:
         r_p = st.selectbox("Pollutant", avail_poll, key="roll_p")
         st.plotly_chart(chart_rolling(sel_df,r_p,selected_site,sel_color),
-                        use_container_width=True)
+                        use_container_width=True, key="pc_rolling")
         st.caption("Faint=raw · Yellow=1-h · Orange=3-h · Red=24-h rolling mean")
     else:
         st.info("No pollutant data.")
@@ -1737,7 +1861,7 @@ with tab_scatter:
             y_p = st.selectbox("Y Axis", avail_poll,
                                 index=min(1,len(avail_poll)-1), key="sc_y")
         st.plotly_chart(
-            chart_scatter_pair(sel_df,x_p,y_p,selected_site,sel_color),
+            chart_scatter_pair(sel_df,x_p,y_p,selected_site,sel_color, key="pc_scatter"),
             use_container_width=True)
     else:
         st.info("Need at least 2 pollutant columns for scatter plot.")
@@ -1745,14 +1869,14 @@ with tab_scatter:
 # ── Correlation ───────────────────────────────────────────────────────────────
 with tab_corr:
     st.plotly_chart(chart_correlation(sel_df,selected_site),
-                    use_container_width=True)
+                    use_container_width=True, key="pc_correlation")
     st.caption("Pearson r.  Blue=negative · Red=positive.")
 
 # ── Wind Rose ─────────────────────────────────────────────────────────────────
 with tab_wind:
     wr = chart_wind_rose(sel_df, selected_site)
     if wr:
-        st.plotly_chart(wr, use_container_width=True)
+        st.plotly_chart(wr, use_container_width=True, key="pc_windrose")
     else:
         st.info("No wind speed/direction columns detected in this dataset.\n\n"
                 "MOD-PM units don't include anemometers — wind data requires "
@@ -1765,10 +1889,10 @@ with tab_compare:
         col_bx, col_ts = st.columns([1,2])
         with col_bx:
             st.plotly_chart(chart_boxplot_compare(site_data,c_p,colors),
-                            use_container_width=True)
+                            use_container_width=True, key="pc_compare_box")
         with col_ts:
             st.plotly_chart(chart_timeseries_compare(site_data,c_p,colors),
-                            use_container_width=True)
+                            use_container_width=True, key="pc_compare_ts")
         with st.expander("📋 Hourly Average Comparison Table"):
             hf = []
             for site, df in site_data.items():
